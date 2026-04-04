@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form action="/api/listing" method="post">
+        <label>Listing title:</label>
+        <input type="text" name="title" placeholder="ex: UOP lab coat" required>
+        <br>
+
+        <label>Listing Summary:</label>
+        <input type="text" name="summary" placeholder="a one-liner visible on the search page">
+        <br>
+
+        <label>Price:</label>
+        <input type="number" name="price" placeholder="price">
+        <br>
+
+        <label>Listing Description:</label>
+        <input type="text" name="description" placeholder="detailed description visible when viewing the listing">
+        <br>
+
+        <label>Location:</label>
+        <input type="text" name="location" placeholder="ex: The Grove">
+        <br>
+
+        <label>Your Name:</label>
+        <input type="text" name="user_name" placeholder="ex: Bob Smith" required>
+        <br>
+
+        <label>Contact Email (public):</label>
+        <input type="email" name="contact_email" placeholder="email" required>
+        <br>
+
+        <label>Contact Phone (public, optional):</label>
+        <input type="text" name="contact_phone" placeholder="15551234567">
+        <br>
+
+        <button type="submit">post</button>
+    </form>
+</body>
+</html>

@@ -1,13 +1,26 @@
-
-from flask import Flask, url_for, render_template
-
+from flask import Flask, request, redirect, render_template
 from db import init_db, insert_listing, Listing
 
 app = Flask(__name__)
 
-@app.route('/api/helloworld', methods=['GET'])
-def send():
-    return "hello world", 200
+@app.route('/api/listing', methods=['POST'])
+def listing_endpoint():
+    print("deez =", request.form.get("deez"))
+
+    listing = Listing(
+        title=request.form.get("title"),
+        price=float(request.form.get("price")),
+        user_name=request.form.get("user_name"),
+        contact_email=request.form.get("contact_email"),
+        contact_phone=request.form.get("contact_phone"),
+        location=request.form.get("location"),
+        description=request.form.get("description"),
+        summary=request.form.get("summary"),
+    )
+    insert_listing(listing)
+
+    # TODO: redirect to listing page
+    return redirect("/", 302)
 
 @app.route('/') # the website itself
 def index():
@@ -16,23 +29,13 @@ def index():
 
 
 
+@app.route('/debug')
+def debug():
+    return render_template("debug.html")
 
 
 if __name__ == '__main__':
     init_db()
-
-    listing = Listing(
-        "test listing",
-        420.69,
-        "bob smith",
-        "example@u.pacific.edu",
-        18004206969,
-        "The Grove",
-        "testing 123\nthis is a listing description",
-        "short one-liner to show in search/listings"
-    )
-    insert_listing(listing)
-
     app.run()
 
 

@@ -1,6 +1,5 @@
 import sqlite3
 
-db = sqlite3.connect("database.db")
 
 class Listing(object):
     def __init__(self,
@@ -25,9 +24,13 @@ class Listing(object):
         self.sold = sold
         self.listing_id = listing_id
 
+def get_db():
+    db = sqlite3.connect("database.db")
+    return db
 
 def insert_listing(listing: Listing):
     assert listing.listing_id is None   # must not exist
+    db = get_db()
     cur = db.cursor()
     cur.execute(
         "INSERT INTO listing (title, price, user_name, contact_email, contact_phone, location, description, summary, sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
@@ -37,6 +40,7 @@ def insert_listing(listing: Listing):
     db.commit()
 
 def init_db():
+    db = get_db()
     cur = db.cursor()
     cur.execute("""
     CREATE TABLE IF NOT EXISTS listing(
