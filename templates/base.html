@@ -1,21 +1,62 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">                     <!-- ensures special characters display correctly -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- makes it mobile friendly -->
-    <title>UniMarket</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  <!-- loads our CSS file -->
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
 
 <nav>                                          <!-- top navigation bar shown on every page -->
     <a href="/" class="logo">🎓 Pacific Tradeup</a>  <!-- clicking the logo always goes home -->
     <a href="/listing/create" class="btn-post">+ Post Item</a>  <!-- button to post a new listing -->
 </nav>
+<div class="hero">
+  <div class="hero-inner">
+    <p class="hero-label">Student Marketplace</p>
+    <h1 class="hero-title">Buy &amp; sell on campus.</h1>
+    <p class="hero-sub">Find textbooks, electronics, furniture &amp; more from fellow students.</p>
+    <form method="GET" action="/" class="search-row">
+      <input class="search-input" type="text" name="q" placeholder="Search listings…">
+      <button class="filter-btn" type="submit">Search</button>
+    </form>
+  </div>
+</div>
+
+<div class="categories-bar">
+  <a href="/" class="cat {% if active_category == 'All' %}active{% endif %}">All</a>
+  {% for cat in ['Textbooks', 'Electronics', 'Furniture', 'Clothing', 'Other'] %}
+    <a href="/?category={{ cat }}" class="cat {% if active_category == cat %}active{% endif %}">{{ cat }}</a>
+  {% endfor %}
+</div>
 
 <main>
-    {% block content %}{% endblock %}          <!-- each page's unique content goes here -->
+  <div class="section-head">
+    <h2>Recent listings</h2>
+    <span>{{ listings|length }} item{{ 's' if listings|length != 1 else '' }}</span>
+  </div>
+
+  {% if listings %}
+  <div class="grid">
+    {% for item in listings %}
+    <a href="/listing/{{ item.id }}" class="card">
+      <div class="card-img {{ item.category | lower }}">
+        <span class="card-emoji">{{ item.emoji }}</span>
+      </div>
+      <div class="card-body">
+        <span class="card-tag {{ item.category | lower }}">{{ item.category }}</span>
+        <h3 class="card-title">{{ item.title }}</h3>
+        <p class="card-desc">{{ item.description[:70] }}{% if item.description|length > 70 %}…{% endif %}</p>
+        <div class="card-footer">
+          <span class="card-price">${{ "%.2f" | format(item.price) }}</span>
+          <span class="card-view-btn">View →</span>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <span class="empty-emoji">🛍️</span>
+    <h3>No listings yet</h3>
+    <p>Be the first to post an item!</p>
+    <a href="/post" class="btn-post-cta">+ Post an item</a>
+  </div>
+  {% endif %}
 </main>
 
-</body>
-</html>
+{% endblock %}
