@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, render_template
-from db import init_db, insert_listing, Listing, get_listing
+from db import init_db, insert_listing, Listing, get_listing, get_top_listings
 
 app = Flask(__name__)
 
@@ -28,7 +28,8 @@ def listing_view(id):
 
 @app.route('/')
 def base():
-    return render_template("index.html")
+    listings = get_top_listings()
+    return render_template("index.html", listings=listings)
 
 """
 

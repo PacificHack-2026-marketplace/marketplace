@@ -8,7 +8,7 @@
 
 <div class="grid">                             <!-- CSS grid that arranges cards in columns -->
     {% for listing in listings %}              <!-- loop through every listing from the database -->
-    <a href="/listing/{{ listing.id }}" class="card">   <!-- each card links to that listing's page -->
+    <a href="/listing/{{ listing.listing_id }}" class="card">   <!-- each card links to that listing's page -->
         <span class="tag">{{ listing.category }}</span> <!-- shows the category as a small badge -->
         <h3>{{ listing.title }}</h3>                    <!-- shows the item title -->
         <p class="price">${{ listing.price }}</p>       <!-- shows the price -->
