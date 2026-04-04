@@ -3,7 +3,7 @@
 
 <div class="form-wrap">
     <h2>Post an Item</h2>
-    <form method="POST">                       <!-- submits form data back to /post as a POST request -->
+    <form action="/api/listing" method="POST">                       <!-- submits form data back to /post as a POST request -->
 
         <label>Title</label>
         <input type="text" name="title" placeholder="e.g. Chemistry Textbook" required>
@@ -17,6 +17,12 @@
         <input type="number" name="price" placeholder="e.g. 25.00" step="0.01" min="0" required>
         <!-- step="0.01" allows decimal prices, min="0" prevents negative prices -->
 
+        <label>Your Name</label>
+        <input type="text" name="user_name" placeholder="e.g. Bob Smith" required>
+
+        <label>Location</label>
+        <input type="text" name="location" placeholder="ex: The Grove">
+
         <label>Category</label>
         <select name="category">               <!-- dropdown menu -->
             <option value="Textbooks">Textbooks</option>
@@ -27,7 +33,7 @@
         </select>
 
         <label>Your Email (so buyers can contact you)</label>
-        <input type="email" name="email" placeholder="you@university.edu" required>
+        <input type="email" name="contact_email" placeholder="you@university.edu" required>
         <!-- type="email" makes the browser check it's a valid email format -->
 
         <button type="submit">Post Listing</button>   <!-- submits the form -->
