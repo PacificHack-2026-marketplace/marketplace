@@ -3,6 +3,7 @@
 
 <div class="listing-detail">
     <a href="/" class="back">← Back to listings</a>           <!-- link to return to homepage -->
+    <span class="tag">{{ listing.category }}</span>            <!-- shows the category badge -->
     <h1>{{ listing.title }}</h1>                               <!-- shows the full title -->
     <p class="price">${{ listing.price }}</p>                  <!-- shows the price -->
     <p class="description">{{ listing.description }}</p>       <!-- shows the full description -->
