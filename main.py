@@ -15,3 +15,25 @@ if __name__ == '__main__':
     app.run()
 # test case
 #test case2
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">                     <!-- ensures special characters display correctly -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">  <!-- makes it mobile friendly -->
+    <title>UniMarket</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">  <!-- loads our CSS file -->
+</head>
+<body>
+
+<nav>                                          <!-- top navigation bar shown on every page -->
+    <a href="/" class="logo">🎓 UniMarket</a>  <!-- clicking the logo always goes home -->
+    <a href="/post" class="btn-post">+ Post Item</a>  <!-- button to post a new listing -->
+</nav>
+
+<main>
+    {% block content %}{% endblock %}          <!-- each page's unique content goes here -->
+</main>
+
+</body>
+</html>
