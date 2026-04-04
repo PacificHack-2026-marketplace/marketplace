@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}          <!-- use base.html as the layout wrapper -->
+{% block content %}
 
-</body>
-</html>
+<div class="listing-detail">
+    <a href="/" class="back">← Back to listings</a>           <!-- link to return to homepage -->
+    <span class="tag">{{ listing.category }}</span>            <!-- shows the category badge -->
+    <h1>{{ listing.title }}</h1>                               <!-- shows the full title -->
+    <p class="price">${{ listing.price }}</p>                  <!-- shows the price -->
+    <p class="description">{{ listing.description }}</p>       <!-- shows the full description -->
+    <div class="contact-box">
+        <p>Interested? Contact the seller:</p>
+        <a href="mailto:{{ listing.email }}" class="btn-contact">  <!-- opens email app with seller's address -->
+            ✉ Email Seller
+        </a>
+    </div>
+</div>
+
+{% endblock %}
