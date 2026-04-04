@@ -25,18 +25,30 @@ def listing_view(id):
     print(listing)
     return render_template("listing.html", listing=listing)
 
-
-@app.route('/') # the website itself
+@app.route('/')
+def base():
+    return render_template("debug.html")
+"""
+@app.route('/base')
+def base():
+    return render_template("base.html")
+    
+@app.route('/index') 
 def index():
-    return render_template("base.html", message="hello world")
+    return render_template("index.html", message="hello world")
 
-
-
-
+@app.route('/listing')
+def listing():
+    return render_template("listing.html")
+    
+@app.route('/create_listing')
+def create_listing():
+    return render_template("create_listing.html")
+    
 @app.route('/debug')
 def debug():
     return render_template("debug.html")
-
+"""
 
 if __name__ == '__main__':
     init_db()
