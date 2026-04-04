@@ -8,9 +8,12 @@ app = Flask(__name__)
 def send():
     return "hello world", 200
 
-@app.route('/')
+@app.route('/') # the website itself
 def index():
-    return render_template("index.html", message="hello world")
+    return render_template("base.html", message="hello world")
+
+
+
 
 
 def init_db():
