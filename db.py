@@ -63,13 +63,10 @@ def get_listing(id: int):
 
     return parse_listing(row)
 
-def get_top_listings(limit: int = 20):
+def _get_top_listings(query, params):
     db = get_db()
     cur = db.cursor()
-    result = cur.execute(
-        "SELECT " + LISTING_QUERY_COLS + " FROM listing LIMIT ?",
-        (limit,)
-    )
+    result = cur.execute(query, params)
 
     rows = result.fetchall()
 
@@ -77,6 +74,25 @@ def get_top_listings(limit: int = 20):
     db.commit()
 
     return [parse_listing(r) for r in rows]
+
+
+def get_top_listings(limit: int = 20, category: str|None = None, search_keywords: list|None = None):
+    where_clauses = []
+    where_params = []
+
+    if category is not None:
+        where_clauses.append("category = ?")
+        where_params.append(category)
+
+    where_clause = " AND ".join(where_clauses)
+    if len(where_clause) > 0:
+        where_clause = "WHERE " + where_clause
+
+    return _get_top_listings(
+        "SELECT " + LISTING_QUERY_COLS + " FROM listing " + where_clause + " LIMIT ?",
+        (*where_params, limit,)
+    )
+
 
 def init_db():
     db = get_db()
