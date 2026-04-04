@@ -32,12 +32,13 @@ def insert_listing(listing: Listing):
     assert listing.listing_id is None   # must not exist
     db = get_db()
     cur = db.cursor()
-    cur.execute(
+    result = cur.execute(
         "INSERT INTO listing (title, price, user_name, contact_email, contact_phone, location, description, summary, sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
         (listing.title, listing.price, listing.user_name, listing.contact_email, listing.contact_phone, listing.location, listing.description, listing.summary, listing.sold)
     )
     cur.close()
     db.commit()
+    return result.lastrowid
 
 def get_listing(id: int):
     db = get_db()

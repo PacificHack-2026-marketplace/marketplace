@@ -15,10 +15,9 @@ def listing_endpoint():
         description=request.form.get("description"),
         summary=request.form.get("summary"),
     )
-    insert_listing(listing)
+    id = insert_listing(listing)
 
-    # TODO: redirect to listing page
-    return redirect("/", 302)
+    return redirect("/listing/%i" % id, 302)
 
 @app.route('/listing/<int:id>')
 def listing_view(id):
