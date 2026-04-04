@@ -1,0 +1,57 @@
+import sqlite3
+
+db = sqlite3.connect("database.db")
+
+class Listing(object):
+    def __init__(self,
+                 title: str,
+                 price: float,
+                 user_name: str,
+                 contact_email: str,
+                 contact_phone: int|None = None,
+                 location: str|None = None,
+                 description: str|None = None,
+                 summary: str|None = None,
+                 sold: bool = False,
+                 listing_id: int|None = None):
+        self.title = title
+        self.price = price
+        self.user_name = user_name
+        self.contact_email = contact_email
+        self.contact_phone = contact_phone
+        self.location = location
+        self.description = description
+        self.summary = summary
+        self.sold = sold
+        self.listing_id = listing_id
+
+
+def insert_listing(listing: Listing):
+    assert listing.listing_id is None   # must not exist
+    cur = db.cursor()
+    cur.execute(
+        "INSERT INTO listing (title, price, user_name, contact_email, contact_phone, location, description, summary, sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (listing.title, listing.price, listing.user_name, listing.contact_email, listing.contact_phone, listing.location, listing.description, listing.summary, listing.sold)
+    )
+    cur.close()
+    db.commit()
+
+def init_db():
+    cur = db.cursor()
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS listing(
+        listing_id INTEGER PRIMARY KEY AUTOINCREMENT,
+        title TEXT NOT NULL,
+        price REAL NOT NULL,
+        user_name TEXT NOT NULL,
+        contact_email TEXT NOT NULL,
+        contact_phone TEXT,
+        location TEXT,
+        description TEXT,
+        summary TEXT,
+        sold BOOLEAN NOT NULL
+    );
+    """)
+    cur.close()
+    db.commit()
+
