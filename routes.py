@@ -25,4 +25,3 @@ def post():                                    # run this function for the post-
         db.session.commit()                    # save it to the database
         return redirect(url_for('index'))      # send the user back to the homepage
     return render_template('post.html')        # if just loading the page, show the empty form
-
