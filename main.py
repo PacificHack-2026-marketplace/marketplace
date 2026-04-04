@@ -28,7 +28,7 @@ def listing_view(id):
 
 @app.route('/')
 def base():
-    return render_template("debug.html")
+    return render_template("index.html")
 
 @app.route('/listing/create')
 def create_listing():
