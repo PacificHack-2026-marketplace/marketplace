@@ -1,12 +1,10 @@
 from flask import Flask, request, redirect, render_template
-from db import init_db, insert_listing, Listing
+from db import init_db, insert_listing, Listing, get_listing
 
 app = Flask(__name__)
 
 @app.route('/api/listing', methods=['POST'])
 def listing_endpoint():
-    print("deez =", request.form.get("deez"))
-
     listing = Listing(
         title=request.form.get("title"),
         price=float(request.form.get("price")),
@@ -21,6 +19,13 @@ def listing_endpoint():
 
     # TODO: redirect to listing page
     return redirect("/", 302)
+
+@app.route('/listing/<int:id>')
+def listing_view(id):
+    listing = get_listing(id)
+    print(listing)
+    return render_template("listing.html", listing=listing)
+
 
 @app.route('/') # the website itself
 def index():

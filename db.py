@@ -39,6 +39,23 @@ def insert_listing(listing: Listing):
     cur.close()
     db.commit()
 
+def get_listing(id: int):
+    db = get_db()
+    cur = db.cursor()
+    result = cur.execute(
+        "SELECT * FROM listing WHERE listing_id = ?",
+        (id,)
+    )
+
+    row = result.fetchone()
+    listing = Listing(*row)
+
+    cur.close()
+    db.commit()
+
+    return listing
+
+
 def init_db():
     db = get_db()
     cur = db.cursor()
