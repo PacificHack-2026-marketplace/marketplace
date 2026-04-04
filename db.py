@@ -4,6 +4,7 @@ import sqlite3
 class Listing(object):
     def __init__(self,
                  title: str,
+                 category: str,
                  price: float,
                  user_name: str,
                  contact_email: str,
@@ -14,6 +15,7 @@ class Listing(object):
                  sold: bool = False,
                  listing_id: int|None = None):
         self.title = title
+        self.category = category
         self.price = price
         self.user_name = user_name
         self.contact_email = contact_email
@@ -33,8 +35,8 @@ def insert_listing(listing: Listing):
     db = get_db()
     cur = db.cursor()
     result = cur.execute(
-        "INSERT INTO listing (title, price, user_name, contact_email, contact_phone, location, description, summary, sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        (listing.title, listing.price, listing.user_name, listing.contact_email, listing.contact_phone, listing.location, listing.description, listing.summary, listing.sold)
+        "INSERT INTO listing (title, category, price, user_name, contact_email, contact_phone, location, description, summary, sold) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        (listing.title, listing.category, listing.price, listing.user_name, listing.contact_email, listing.contact_phone, listing.location, listing.description, listing.summary, listing.sold)
     )
     cur.close()
     db.commit()
@@ -44,7 +46,7 @@ def get_listing(id: int):
     db = get_db()
     cur = db.cursor()
     result = cur.execute(
-        "SELECT title, price, user_name, contact_email, contact_phone, location, description, summary, sold, listing_id FROM listing WHERE listing_id = ?",
+        "SELECT title, category, price, user_name, contact_email, contact_phone, location, description, summary, sold, listing_id FROM listing WHERE listing_id = ?",
         (id,)
     )
 
@@ -72,6 +74,7 @@ def init_db():
         location TEXT,
         description TEXT,
         summary TEXT,
+        category TEXT,
         sold BOOLEAN NOT NULL
     );
     """)
