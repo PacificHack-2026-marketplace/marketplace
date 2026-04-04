@@ -44,11 +44,12 @@ def get_listing(id: int):
     db = get_db()
     cur = db.cursor()
     result = cur.execute(
-        "SELECT * FROM listing WHERE listing_id = ?",
+        "SELECT title, price, user_name, contact_email, contact_phone, location, description, summary, sold, listing_id FROM listing WHERE listing_id = ?",
         (id,)
     )
 
     row = result.fetchone()
+    print(row)
     listing = Listing(*row)
 
     cur.close()
