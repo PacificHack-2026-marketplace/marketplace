@@ -30,7 +30,7 @@
   {% if listings %}
   <div class="grid">
     {% for item in listings %}
-    <a href="/listing/{{ item.id }}" class="card">
+    <a href="/listing/{{ item.listing_id }}" class="card">
       <div class="card-img {{ item.category | lower }}">
         <span class="card-emoji">{{ item.emoji }}</span>
       </div>
