@@ -42,19 +42,3 @@ def debug():
 if __name__ == '__main__':
     init_db()
     app.run()
-
-
-
-#Main updated file (might not use)
-
-from flask import Flask                        # imports Flask to create our web app
-
-app = Flask(__name__)                          # creates the Flask app
-app.config['SECRET_KEY'] = 'abc123'           # a simple secret key (fine for a hackathon)
-
-from routes.py import *                           # loads all our page routes from routes.py
-
-if __name__ == '__main__':                     # only runs when we start the app directly
-    with app.app_context():                    # gives Flask the context it needs to access the database
-        db.create_all()                        # creates the database tables if they don't exist yet
-    app.run(debug=True)                        # starts the local server at http://localhost:5000
