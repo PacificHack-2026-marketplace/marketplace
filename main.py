@@ -31,13 +31,12 @@ def base():
     listings = get_top_listings()
     return render_template("index.html", listings=listings)
 
-"""
-
 @app.route('/listing/create')
 def create_listing():
     return render_template("create_listing.html")
 
 
+"""
 @app.route('/base')
 def base():
     return render_template("base.html")
