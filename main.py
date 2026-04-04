@@ -28,7 +28,14 @@ def listing_view(id):
 
 @app.route('/')
 def base():
-    listings = get_top_listings()
+    search_params = {}
+    if 'category' in request.args:
+        search_params['category'] = request.args.get('category')
+
+    if 'q' in request.args:
+        search_params['search_keywords'] = request.args.get('q').split(' ')
+
+    listings = get_top_listings(**search_params)
     return render_template("index.html", listings=listings)
 
 @app.route('/listing/create')
