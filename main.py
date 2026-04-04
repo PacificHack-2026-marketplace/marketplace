@@ -13,5 +13,4 @@ def index():
 
 if __name__ == '__main__':
     app.run()
-    url_for('static', filename='style.css')
 
