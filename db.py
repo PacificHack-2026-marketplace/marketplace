@@ -84,6 +84,15 @@ def get_top_listings(limit: int = 20, category: str|None = None, search_keywords
         where_clauses.append("category = ?")
         where_params.append(category)
 
+    if search_keywords is not None:
+        keyword_clauses = []
+        for kw in search_keywords:
+            keyword_clauses.append("(title LIKE ? OR description LIKE ?)")
+            like = f"%{kw}%"
+            where_params.extend([like, like])
+
+        where_clauses.append("(" + " AND ".join(keyword_clauses) + ")")
+
     where_clause = " AND ".join(where_clauses)
     if len(where_clause) > 0:
         where_clause = "WHERE " + where_clause
