@@ -7,6 +7,7 @@ app = Flask(__name__)
 def listing_endpoint():
     listing = Listing(
         title=request.form.get("title"),
+        category=request.form.get("category"),
         price=float(request.form.get("price")),
         user_name=request.form.get("user_name"),
         contact_email=request.form.get("contact_email"),
