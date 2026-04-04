@@ -42,23 +42,41 @@ def insert_listing(listing: Listing):
     db.commit()
     return result.lastrowid
 
+LISTING_QUERY_COLS = "title, category, price, user_name, contact_email, contact_phone, location, description, summary, sold, listing_id"
+
+def parse_listing(row) -> Listing:
+    return Listing(*row)
+
 def get_listing(id: int):
     db = get_db()
     cur = db.cursor()
     result = cur.execute(
-        "SELECT title, category, price, user_name, contact_email, contact_phone, location, description, summary, sold, listing_id FROM listing WHERE listing_id = ?",
+        "SELECT " + LISTING_QUERY_COLS + " FROM listing WHERE listing_id = ?",
         (id,)
     )
 
     row = result.fetchone()
     print(row)
-    listing = Listing(*row)
 
     cur.close()
     db.commit()
 
-    return listing
+    return parse_listing(row)
 
+def get_top_listings(limit: int = 20):
+    db = get_db()
+    cur = db.cursor()
+    result = cur.execute(
+        "SELECT " + LISTING_QUERY_COLS + " FROM listing LIMIT ?",
+        (limit,)
+    )
+
+    rows = result.fetchall()
+
+    cur.close()
+    db.commit()
+
+    return [parse_listing(r) for r in rows]
 
 def init_db():
     db = get_db()
