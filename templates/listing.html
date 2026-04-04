@@ -3,16 +3,37 @@
 
 <div class="listing-detail">
     <a href="/" class="back">← Back to listings</a>           <!-- link to return to homepage -->
-    <span class="tag">{{ listing.category }}</span>            <!-- shows the category badge -->
-    <h1>{{ listing.title }}</h1>                               <!-- shows the full title -->
-    <p class="price">${{ listing.price }}</p>                  <!-- shows the price -->
-    <p class="description">{{ listing.description }}</p>       <!-- shows the full description -->
-    <div class="contact-box">
-        <p>Interested? Contact the seller:</p>
-        <a href="mailto:{{ listing.contact_email }}" class="btn-contact">  <!-- opens email app with seller's address -->
-            ✉ Email Seller
-        </a>
+    <div class="tag"><small>{{ listing.category }}</small></div>            <!-- shows the category badge -->
+
+    <div class="listing-flex">
+        <div>
+
+            <div class="image">
+                pretend that this is an image
+            </div>
+
+
+        </div>
+        <div>
+
+            <h1>{{ listing.title }}</h1>                               <!-- shows the full title -->
+            <p class="price">${{ listing.price }}</p>                  <!-- shows the price -->
+
+            <div class="contact-box">
+                <h4>Interested? Contact the seller:</h4>
+                <a href="mailto:{{ listing.contact_email }}" class="btn-contact">  <!-- opens email app with seller's address -->
+                    ✉ Email Seller
+                </a>
+            </div>
+
+            <div class="description-container">
+                <h4>Description</h4>
+                <p class="description">{{ listing.description }}</p>       <!-- shows the full description -->
+            </div>
+
+        </div>
     </div>
+
 </div>
 
 {% endblock %}

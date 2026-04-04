@@ -524,3 +524,46 @@ main {
   main { padding: 1.5rem 1rem; }
   .categories-bar { padding: 0.8rem 1rem; }
 }
+
+.price {
+    font-size: 2rem;
+}
+
+.description-container {
+    border-color: #696969;
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: .1rem;
+    padding: .5rem;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+}
+
+.listing-detail h1 {
+    font-size: 1.7rem;
+}
+
+.listing-detail .image {
+    background: #aaaaaa;
+    height: 20vw;
+}
+
+.listing-flex {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    flex-basis: 50%;
+}
+
+.listing-flex > * {
+    flex-grow: 1;
+    margin: 2rem;
+    margin-top: .5rem;
+}
+
+.tag {
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
