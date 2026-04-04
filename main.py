@@ -30,12 +30,12 @@ def listing_view(id):
 def base():
     return render_template("index.html")
 
-
+"""
 @app.route('/listing/create')
 def create_listing():
     return render_template("create_listing.html")
 
-"""
+
 @app.route('/base')
 def base():
     return render_template("base.html")
