@@ -1,16 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="static/style.css">
-    <title>marketplace</title>
-</head>
-<body style="background-image: url({{ backdrop }});">
-    <div class="aaa">
-        {{ message|safe }}
-    </div>
+{% extends "base.html" %}          <!-- use base.html as the layout wrapper -->
+{% block content %}
 
-</body>
-</html>
+<div class="page-header">
+    <h1>What's for sale?</h1>
+    <p>Browse items posted by students at your university</p>
+</div>
+
+<div class="grid">                             <!-- CSS grid that arranges cards in columns -->
+    {% for listing in listings %}              <!-- loop through every listing from the database -->
+    <a href="/listing/{{ listing.id }}" class="card">   <!-- each card links to that listing's page -->
+        <span class="tag">{{ listing.category }}</span> <!-- shows the category as a small badge -->
+        <h3>{{ listing.title }}</h3>                    <!-- shows the item title -->
+        <p class="price">${{ listing.price }}</p>       <!-- shows the price -->
+        <p class="desc">{{ listing.description[:80] }}...</p>  <!-- shows first 80 characters of description -->
+    </a>
+    {% else %}                                 <!-- if no listings exist yet, show this message -->
+    <p class="empty">No listings yet — be the first to post!</p>
+    {% endfor %}                               <!-- ends the loop -->
+</div>
+
+{% endblock %}
