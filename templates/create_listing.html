@@ -7,6 +7,16 @@
     <h2>Post an Item</h2>
     <form action="/api/listing" method="POST">                       <!-- submits form data back to /post as a POST request -->
 
+        <label>Email</label>
+        <input type="text" value="{{ user.email }}" disabled>
+
+        <label>Name</label>
+        <input type="text" value="{{ user.name }}" disabled>
+
+        <a href="/logout" class="btn-switch-acct">Switch Account</a>
+        <br>
+        <br>
+
         <label>Title</label>
         <input type="text" name="title" placeholder="e.g. Chemistry Textbook" required>
         <!-- required means the browser won't submit if this is empty -->

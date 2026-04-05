@@ -66,11 +66,16 @@ def create_listing():
         return redirect("/login", 302)
 
     print(user)
-    return render_template("create_listing.html")
+    return render_template("create_listing.html", user=user)
 
 @app.route('/login')
 def login():
     return google.authorize_redirect(redirect_uri='http://127.0.0.1:5000/api/oauth/callback')
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect('/', 302)
 
 @app.route('/api/oauth/callback')
 def callback():

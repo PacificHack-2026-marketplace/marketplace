@@ -69,6 +69,18 @@ nav {
 }
 .btn-post:hover { background: #7b6ed0; }
 
+.btn-switch-acct {
+  background: #6769aa;
+  color: white;
+  padding: 8px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.btn-switch-acct:hover { background: #7b6ed0; }
+
 /* ── Hero ── */
 .hero {
   background: #1a1a2e;
