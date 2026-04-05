@@ -85,7 +85,7 @@ def callback():
     # user info
     session['user'] = user
 
-    return redirect('/')
+    return redirect('/listing/create')
 
 """
 @app.route('/base')
